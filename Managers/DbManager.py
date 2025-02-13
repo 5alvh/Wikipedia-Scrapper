@@ -67,11 +67,50 @@ class dbService:
             conn.close()
             
     def searchUrlInDb(self, url):
-        conn = sqlite3.connect('contentDb.db')
-        cursor = conn.cursor()
-        cursor.execute('SELECT id FROM urls WHERE url = ?', (url,))
-        result = cursor.fetchone() 
-        if result is not None:
-            #print(f"URL exists already in the database: {url} with id: {result[0]}")  
-            return True
-        return False    
+        try:
+            conn = sqlite3.connect('contentDb.db')
+            cursor = conn.cursor()
+            cursor.execute('SELECT id FROM urls WHERE url = ?', (url,))
+            result = cursor.fetchone() 
+            if result is not None:
+                #print(f"URL exists already in the database: {url} with id: {result[0]}")  
+                return True
+            return False    
+        finally:
+            conn.close()
+        
+    
+    def getAllUrls(self):
+        try:
+            conn = sqlite3.connect('contentDb.db')
+            cursor = conn.cursor()
+            cursor.execute('SELECT * FROM urls')
+            urls = cursor.fetchall()
+            return urls
+        finally:
+            conn.close()
+    
+    def deleteUrl(self,url_id):
+        try:
+            conn = sqlite3.connect('contentDb.db')
+            cursor = conn.cursor()
+            cursor.execute('DELETE FROM urls WHERE id = ?', (url_id,))
+            conn.commit()
+        finally:
+            conn.close()
+
+    def getContent(self, url_id):
+        try:
+            conn = sqlite3.connect('contentDb.db')
+            cursor = conn.cursor()
+            query = """
+            SELECT Title, content, content_type
+            FROM content
+            WHERE url_id = ?
+            """
+            
+            cursor.execute(query, (url_id,))
+            data = cursor.fetchall()
+            return data
+        finally:
+            conn.close()

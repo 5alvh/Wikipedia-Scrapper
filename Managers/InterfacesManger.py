@@ -1,5 +1,6 @@
 from tkinter import *
 
+from Interfaces.UrlsInterface import UrlsInterface
 from Interfaces.TheScrapperInterface import TheScrapperInterface
 
 
@@ -54,8 +55,9 @@ class UiManager:
         )
         btn_search = Button(
             button_frame, 
-            text="Search in Scrapped URLs", 
-            **button_style
+            text="Manage Scrapped URLs", 
+            **button_style,
+            command=self.theSearcher
         )
         btn_create = Button(
             button_frame, 
@@ -87,7 +89,7 @@ class UiManager:
         TheScrapperInterface(self.root)
 
     def theSearcher(self):
-        pass
+        UrlsInterface(self.root)
 
     def thePageCreator(self):
         pass

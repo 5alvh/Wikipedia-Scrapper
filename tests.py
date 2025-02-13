@@ -3,6 +3,9 @@ import requests
 from Managers.InterfacesManger import UiManager
 
 ui = UiManager()
+#db = dbService()
+#urls = db.getAllUrls()
+#print(urls)
 #response = requests.get("https://en.wikipedia.org/wiki/Morocco")
 #print(response)
 

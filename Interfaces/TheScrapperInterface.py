@@ -92,9 +92,9 @@ class TheScrapperInterface:
         self.root.mainloop()
 
     def scrap(self):
+        self.response_field.config(state= "normal")
         self.response_field.delete("1.0", "end")
         scrapped_result = self.scrapper.scrape_url(self.input_field.get())
-        self.response_field.config(state= "normal")
         self.response_field.insert("1.0", scrapped_result["message"])
         self.response_field.config(state="disabled")
         self.response_field.update_idletasks() 

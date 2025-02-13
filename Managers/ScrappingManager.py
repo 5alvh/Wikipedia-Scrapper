@@ -5,9 +5,8 @@ from Managers.DbManager import dbService
 
 class ScrappingManager:
 
-    db = dbService()
-
     def __init__(self):
+        self.db = dbService()
         print("Initializing the Scrapping MANGEEEEEER...")
         
     def checkUrlInDb(self, url):
